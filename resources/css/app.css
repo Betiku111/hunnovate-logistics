@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@plugin '@tailwindcss/forms';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =============================================================
+   HUNNOVATE LOGISTICS — DESIGN TOKENS
+   Tailwind 4 uses CSS-first config via @theme.
+   These tokens generate utilities like bg-brand, text-brand, etc.
+   ============================================================= */
+@theme {
+    /* Brand palette */
+    --color-brand:              #4F46E5;
+    --color-brand-hover:        #4338CA;
+    --color-brand-dark:         #3730A3;
+    --color-brand-light:        #EEF2FF;
+
+    /* Navy (sidebar, dark UI) */
+    --color-navy:               #0F172A;
+    --color-navy-sidebar:       #0B1736;
+
+    /* Neutrals */
+    --color-surface:            #FFFFFF;
+    --color-surface-muted:      #F8FAFC;
+    --color-border:             #E2E8F0;
+    --color-border-strong:      #CBD5E1;
+
+    /* Text */
+    --color-ink:                #0F172A;
+    --color-ink-muted:          #64748B;
+    --color-ink-subtle:         #94A3B8;
+
+    /* Semantic */
+    --color-success:            #16A34A;
+    --color-success-bg:         #F0FDF4;
+    --color-warning:            #F59E0B;
+    --color-warning-bg:         #FFFBEB;
+    --color-danger:             #DC2626;
+    --color-danger-bg:          #FEF2F2;
+    --color-info:               #2563EB;
+    --color-info-bg:            #EFF6FF;
+
+    /* Font */
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+    /* Radii */
+    --radius-sm: 6px;
+    --radius:    10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+
+    /* Shadows (subtle) */
+    --shadow-card:  0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+    --shadow-hover: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+
+    /* Sidebar width */
+    --spacing-sidebar: 15rem;
+}
+
+/* =============================================================
+   BASE STYLES
+   ============================================================= */
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        font-family: var(--font-sans);
+        color: var(--color-ink);
+    }
+
+    /* Better focus rings */
+    :focus-visible {
+        outline: 2px solid var(--color-brand);
+        outline-offset: 2px;
+    }
+}
+
+/* =============================================================
+   COMPONENT UTILITIES
+   ============================================================= */
+@layer utilities {
+    .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+}

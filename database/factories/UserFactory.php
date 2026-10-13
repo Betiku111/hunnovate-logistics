@@ -1,0 +1,48 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Enums\UserRole;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+class UserFactory extends Factory
+{
+    protected static ?string $password = null;
+
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->unique()->numerify('080########'),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'role' => UserRole::Customer->value,
+            'is_active' => true,
+            'theme_preference' => 'system',
+            'remember_token' => Str::random(10),
+        ];
+    }
+
+    public function customer(): static
+    {
+        return $this->state(fn () => ['role' => UserRole::Customer->value]);
+    }
+
+    public function rider(): static
+    {
+        return $this->state(fn () => ['role' => UserRole::Rider->value]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn () => ['role' => UserRole::Admin->value]);
+    }
+
+    public function unverified(): static
+    {
+        return $this->state(fn () => ['email_verified_at' => null]);
+    }
+}
